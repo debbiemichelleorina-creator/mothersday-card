@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Mother's Day</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #ffe6f2, #fff0f5);
+      overflow: hidden;
+    }
+    h1 {
+      color: #d63384;
+      font-size: 3em;
+      margin-top: 20px;
+    }
+    #message {
+      font-size: 1.5em;
+      margin: 20px;
+      color: #6a0572;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      background: #ff80bf;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .flower, .heart {
+      position: absolute;
+      font-size: 2em;
+      animation: floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+    #hug {
+      font-size: 4em;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌸 Happy Mother's Day 🌸</h1>
+  <p id="message">Click "Open Card" to begin!</p>
+  
+  <button onclick="openCard()">Open Card</button>
+  <button onclick="hugMom()">Click for a Hug 🤗</button>
+  <button onclick="showCompliment()">Compliment Mom 💐</button>
+  
+  <div id="hug">🤗🤗🤗</div>
+  
+  <script>
+    const compliments = [
+      "You make the best tea! 🍵",
+      "Your hugs are magical 💖",
+      "Thanks for always believing in me 🌟",
+      "You’re my superhero 🦸‍♀️",
+      "You light up every room ✨"
+    ];
+    
+    function openCard() {
+      let name = prompt("Enter your mom's name:");
+      if (name) {
+        document.getElementById("message").innerText = 
+          `Happy Mother's Day, ${name}! 💐💖`;
+      }
+      // Play cheerful tune
+      let audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+      audio.play();
+      
+      // Create floating flowers/hearts
+      for (let i = 0; i < 10; i++) {
+        let el = document.createElement("div");
+        el.className = Math.random() > 0.5 ? "flower" : "heart";
+        el.innerText = el.className === "flower" ? "🌸" : "❤️";
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }
+    }
+    
+    function hugMom() {
+      document.getElementById("hug").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("hug").style.display = "none";
+      }, 3000);
+    }
+    
+    function showCompliment() {
+      const msg = compliments[Math.floor(Math.random() * compliments.length)];
+      document.getElementById("message").innerText = msg;
+    }
+  </script>
+</body>
+</html>
